@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <!-- Templates -->
+
+    <definition name="layout.basic" template="/WEB-INF/views/layouts/basic.jsp">
+        <put-attribute name="title" value="Spring Web MVC with Tiles 3"/>
+        <put-attribute name="header" value="/WEB-INF/views/layouts/header.jsp"/>
+        <put-attribute name="body" value=""/>
+        <put-attribute name="footer" value="/WEB-INF/views/layouts/footer.jsp"/>
+    </definition>
+
+    <!-- Pages -->
+
+    <definition name="login" extends="layout.basic">
+        <put-attribute name="body" value="/WEB-INF/views/login.jsp"/>
+    </definition>
+
+    <definition name="prodAdd" extends="layout.basic">
+        <put-attribute name="body" value="/WEB-INF/views/prodAdd.jsp"/>
+    </definition>
+
+    <definition name="prodId" extends="layout.basic">
+        <put-attribute name="body" value="/WEB-INF/views/findById.jsp"/>
+    </definition>
+
+    <definition name="getProducts" extends="layout.basic">
+        <put-attribute name="body" value="/WEB-INF/views/allProd.jsp"/>
+    </definition>
+
+    <definition name="created_product" extends="layout.basic">
+        <put-attribute name="body" value="/WEB-INF/views/created_product.jsp"/>
+    </definition>
+
+    <definition name="created_user" extends="layout.basic">
+        <put-attribute name="body" value="/WEB-INF/views/created_user.jsp"/>
+    </definition>
+
+    <definition name="userAdd" extends="layout.basic">
+        <put-attribute name="body" value="/WEB-INF/views/userAdd.jsp"/>
+    </definition>
+</tiles-definitions>
