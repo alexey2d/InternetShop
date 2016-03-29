@@ -26,5 +26,6 @@
   </c:forEach>
   <div> <td>Shopping cart</td>
     <td>Quantity: ${quantity}</td>
-    <td>Total Cost: ${totalCost}</td></div>
+    <td>Total Cost: ${totalCost}</td>
+  </div>
 </div>
