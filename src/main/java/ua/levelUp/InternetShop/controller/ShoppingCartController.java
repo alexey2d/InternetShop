@@ -73,6 +73,7 @@ public class ShoppingCartController {
 
         }
         shoppingCart.addOrderItem(product);
+        httpServletRequest.setAttribute("cart", shoppingCart);
         model.addAttribute("totalAmount", shoppingCart.getTotalCartItemsQuantity());
         model.addAttribute("totalCost",  shoppingCart.getTotalCartCost());
 
