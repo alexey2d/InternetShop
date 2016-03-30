@@ -29,9 +29,6 @@ public class ProductController {
     @Autowired
     ProductService productService; // ссылаться надо только на интерфейсы
 
-
-
-
     // методы паблик
     @RequestMapping(value = "getAll", method = RequestMethod.GET)
 //    тут не нужен @ResponseBody
