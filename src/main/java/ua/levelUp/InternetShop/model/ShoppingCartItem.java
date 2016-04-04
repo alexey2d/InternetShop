@@ -1,10 +1,16 @@
 package ua.levelUp.InternetShop.model;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
+
 import java.math.BigDecimal;
 
 /**
  * Created by al on 23.03.2016.
  */
+@Component
+@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class ShoppingCartItem {
     private Product product;
     private int quantity;

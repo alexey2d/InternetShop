@@ -23,8 +23,7 @@ import javax.servlet.http.HttpSession;
  * Created by java on 28.03.2016.
  */
 @Component
-//@Scope("session")
-@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
+@Scope("session")
 @JsonIgnoreProperties(ignoreUnknown = true)
 @RequestMapping("/cart") // то, что добавится к урлу localhost:8080/cart/
 public class ShoppingCartController {
