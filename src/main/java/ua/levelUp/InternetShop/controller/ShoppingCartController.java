@@ -3,6 +3,7 @@ package ua.levelUp.InternetShop.controller;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -22,7 +23,8 @@ import javax.servlet.http.HttpSession;
  * Created by java on 28.03.2016.
  */
 @Component
-@Scope("session")
+//@Scope("session")
+@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 @JsonIgnoreProperties(ignoreUnknown = true)
 @RequestMapping("/cart") // то, что добавится к урлу localhost:8080/cart/
 public class ShoppingCartController {
@@ -33,9 +35,12 @@ public class ShoppingCartController {
 
     @RequestMapping(value = "showCart", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<ShoppingCart> getCart() {
-        ShoppingCart shoppingCart = new ShoppingCart();
-        return new ResponseEntity(shoppingCart, HttpStatus.OK);
+    public ResponseEntity<ShoppingCart> getCart(Model model, HttpServletRequest httpServletRequest) {
+        ShoppingCart shoppingCart;
+//        shoppingCart = new ShoppingCart();
+        httpSession = httpServletRequest.getSession(true);
+        shoppingCart = (ShoppingCart) httpServletRequest.getAttribute("cart");
+        return new ResponseEntity(shoppingCart.getShoppingCartItems(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/product/{id_prod}", method = RequestMethod.GET, produces = "application/json")

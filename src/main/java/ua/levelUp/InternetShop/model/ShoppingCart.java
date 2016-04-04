@@ -1,9 +1,7 @@
 package ua.levelUp.InternetShop.model;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Created by al on 23.03.2016.
@@ -83,5 +81,11 @@ public class ShoppingCart {
         }
 
         return quantity;
+    }
+
+    public List<ShoppingCartItem> getShoppingCartItems() {
+        List<ShoppingCartItem> shoppingCartItemsList = new ArrayList<ShoppingCartItem>(shoppingCartItemHashMap.values());
+        return shoppingCartItemsList;
+//        return shoppingCartItemHashMap.entrySet().toArray();
     }
 }
