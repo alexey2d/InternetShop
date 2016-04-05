@@ -3,10 +3,9 @@ package ua.levelUp.InternetShop.controller;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
-import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,9 +21,8 @@ import javax.servlet.http.HttpSession;
 /**
  * Created by java on 28.03.2016.
  */
-@Component
-@Scope("session")
-@JsonIgnoreProperties(ignoreUnknown = true)
+@Controller // было @Component
+@Scope(value = "session")
 @RequestMapping("/cart") // то, что добавится к урлу localhost:8080/cart/
 public class ShoppingCartController {
     @Autowired
@@ -34,18 +32,18 @@ public class ShoppingCartController {
 
     @RequestMapping(value = "showCart", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<ShoppingCart> getCart(Model model, HttpServletRequest httpServletRequest) {
+    public ResponseEntity<ShoppingCart> showCart(Model model, HttpServletRequest httpServletRequest) {
         ShoppingCart shoppingCart;
 //        shoppingCart = new ShoppingCart();
         httpSession = httpServletRequest.getSession(true);
-        shoppingCart = (ShoppingCart) httpServletRequest.getAttribute("cart");
+        shoppingCart = (ShoppingCart) httpSession.getAttribute("cart");
         return new ResponseEntity(shoppingCart.getShoppingCartItems(), HttpStatus.OK);
     }
 
     @RequestMapping(value = "/product/{id_prod}", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
-    public ResponseEntity showCart(@PathVariable("id_prod") long id, Model model, HttpServletRequest httpServletRequest) {
-//    public ResponseEntity showCart(@PathVariable long id_prod, Model model, HttpServletRequest httpServletRequest) {
+//    public ResponseEntity addToCart(@PathVariable("id_prod") long id, Model model, HttpServletRequest httpServletRequest) {
+    public ResponseEntity showCart(@PathVariable long id_prod, Model model, HttpServletRequest httpServletRequest) {
 /*
 //      Skityashin code
         Product productCart = productService.findById(id_prod);
@@ -68,16 +66,19 @@ public class ShoppingCartController {
         return new ResponseEntity(model, HttpStatus.OK);
         //end of Skityashing code
         */
-        Product product = productService.findById(id);
+        Product product = productService.findById(id_prod);
         ShoppingCart shoppingCart;
         httpSession = httpServletRequest.getSession(true);
-        shoppingCart = (ShoppingCart) httpServletRequest.getAttribute("cart");
+//        shoppingCart = (ShoppingCart) httpServletRequest.getAttribute("cart"); //session! not servletRequest
+        shoppingCart = (ShoppingCart) httpSession.getAttribute("cart");
         if (shoppingCart == null) {
             shoppingCart = new ShoppingCart();
 
         }
-        shoppingCart.addOrderItem(product);
-        httpServletRequest.setAttribute("cart", shoppingCart);
+        shoppingCart.addCartItem(product);
+//        httpServletRequest.setAttribute("cart", shoppingCart); // is not work :( shoppingCart isn't saved
+        httpSession.setAttribute("cart", shoppingCart); // it work property :)
+
         model.addAttribute("totalAmount", shoppingCart.getTotalCartItemsQuantity());
         model.addAttribute("totalCost",  shoppingCart.getTotalCartCost());
 

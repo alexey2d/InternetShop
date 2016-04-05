@@ -2,7 +2,6 @@ package ua.levelUp.InternetShop.model;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -10,7 +9,7 @@ import java.util.*;
 /**
  * Created by al on 23.03.2016.
  */
-@Component
+//@Component
 @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class ShoppingCart {
     private long id;
@@ -29,7 +28,7 @@ public class ShoppingCart {
         this.id = id;
     }
 
-    public ShoppingCartItem addOrderItem(Product product, int quantity) {
+    public ShoppingCartItem addCartItem(Product product, int quantity) {
         ShoppingCartItem currentShoppingCartItem = shoppingCartItemHashMap.get(product.getId());
         if(currentShoppingCartItem != null) {
             currentShoppingCartItem.add(quantity);
@@ -38,15 +37,15 @@ public class ShoppingCart {
         }
 
         return currentShoppingCartItem;
-    };
+    }
 
-    public ShoppingCartItem addOrderItem(Product product){
-        return addOrderItem(product, 1);
-    };
+    public ShoppingCartItem addCartItem(Product product){
+        return addCartItem(product, 1);
+    }
 
     public int getCartItemQuantity(Product product)  {
         return shoppingCartItemHashMap.get(product.getId()).getQuantity();
-    };
+    }
 
     public ShoppingCartItem deleteOrderItem(Product product, int quantity) throws ProductException  {
         ShoppingCartItem currentShoppingCartItem = shoppingCartItemHashMap.get(product.getId());
@@ -62,15 +61,15 @@ public class ShoppingCart {
     private BigDecimal calculateTotalCost() {
         totalCartCost = new BigDecimal(0);
 //        for (HashMap<Long, ShoppingCartItem> items: shoppingCartItemHashMap.values())  {
-//            totalCartCost = totalCartCost.add(items.getOrderItemPrice());
+//            totalCartCost = totalCartCost.add(items.getShoppingCartItemPrice());
 //        }
         Iterator it = shoppingCartItemHashMap.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry<Long, ShoppingCartItem> entry = (Map.Entry)it.next();
-            totalCartCost = totalCartCost.add(entry.getValue().getOrderItemPrice());
+            totalCartCost = totalCartCost.add(entry.getValue().getShoppingCartItemPrice());
         }
         return totalCartCost;
-    };
+    }
 
     public BigDecimal getTotalCartCost() {
         calculateTotalCost();

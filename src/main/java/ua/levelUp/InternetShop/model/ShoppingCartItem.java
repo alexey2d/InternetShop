@@ -1,5 +1,6 @@
 package ua.levelUp.InternetShop.model;
 
+import com.google.common.primitives.Longs;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Component;
@@ -9,7 +10,7 @@ import java.math.BigDecimal;
 /**
  * Created by al on 23.03.2016.
  */
-@Component
+//@Component
 @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class ShoppingCartItem {
     private Product product;
@@ -31,7 +32,7 @@ public class ShoppingCartItem {
         this.quantity = quantity;
     }
 
-    public BigDecimal getOrderItemPrice() {
+    public BigDecimal getShoppingCartItemPrice() {
         totalPrice = new BigDecimal(quantity);
         totalPrice = totalPrice.multiply(product.getPrice());
         return totalPrice;
@@ -64,7 +65,7 @@ public class ShoppingCartItem {
 
     @Override
     public int hashCode() {
-        return Long.hashCode(product.getId());
+        return Longs.hashCode(product.getId());
     }
 
     @Override
