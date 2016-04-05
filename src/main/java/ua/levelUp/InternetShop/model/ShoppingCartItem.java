@@ -1,26 +1,32 @@
 package ua.levelUp.InternetShop.model;
 
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.stereotype.Component;
+
 import java.math.BigDecimal;
 
 /**
  * Created by al on 23.03.2016.
  */
-public class OrderItem {
+@Component
+@Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
+public class ShoppingCartItem {
     private Product product;
     private int quantity;
     private BigDecimal totalPrice; //  = new BigDecimal(0);
 
 
-    public OrderItem() {
+    public ShoppingCartItem() {
         this.quantity = 0;
     }
 
-    public OrderItem(Product product) {
+    public ShoppingCartItem(Product product) {
         this.product = product;
         this.quantity = 1;
     }
 
-    public OrderItem(Product product, int quantity) {
+    public ShoppingCartItem(Product product, int quantity) {
         this.product = product;
         this.quantity = quantity;
     }
@@ -64,12 +70,12 @@ public class OrderItem {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof OrderItem)) return false;
+        if (!(o instanceof ShoppingCartItem)) return false;
 
-        OrderItem orderItem = (OrderItem) o;
+        ShoppingCartItem shoppingCartItem = (ShoppingCartItem) o;
 
-        if (getQuantity() != orderItem.getQuantity()) return false;
-        return getProduct().equals(orderItem.getProduct());
+        if (getQuantity() != shoppingCartItem.getQuantity()) return false;
+        return getProduct().equals(shoppingCartItem.getProduct());
 
     }
 }
