@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import ua.levelUp.InternetShop.model.Product;
 import ua.levelUp.InternetShop.model.ShoppingCart;
 import ua.levelUp.InternetShop.service.ProductService;
@@ -43,7 +44,7 @@ public class ShoppingCartController {
     @RequestMapping(value = "/product/{id_prod}", method = RequestMethod.GET, produces = "application/json")
     @ResponseBody
 //    public ResponseEntity addToCart(@PathVariable("id_prod") long id, Model model, HttpServletRequest httpServletRequest) {
-    public ResponseEntity showCart(@PathVariable long id_prod, Model model, HttpServletRequest httpServletRequest) {
+    public ResponseEntity addToCart(@PathVariable long id_prod, Model model, HttpServletRequest httpServletRequest) {
 /*
 //      Skityashin code
         Product productCart = productService.findById(id_prod);
@@ -83,6 +84,27 @@ public class ShoppingCartController {
         model.addAttribute("totalCost",  shoppingCart.getTotalCartCost());
 
         return new ResponseEntity(model, HttpStatus.OK);
+    }
+
+//    удаление товара из карты. товар из карты удаляется
+    @RequestMapping(value = "/delete/{id_prod}", method = RequestMethod.POST, produces = "application/json")
+    public ModelAndView deleteProduct(@PathVariable("id_prod") long id, Model model, HttpServletRequest httpServletRequest) {
+        Product product = productService.findById(id);
+        ShoppingCart shoppingCart;
+        httpSession = httpServletRequest.getSession(true);
+        shoppingCart =  (ShoppingCart) httpSession.getAttribute("cart");
+        shoppingCart.deleteCartItem(product);
+
+        httpSession.setAttribute("cart", shoppingCart);
+        model.addAttribute("totalAmount", shoppingCart.getTotalCartItemsQuantity());
+        model.addAttribute("totalCost",  shoppingCart.getTotalCartCost());
+        return new ModelAndView("showCart");
+    }
+
+    @RequestMapping(value = "checkout", method = RequestMethod.POST, produces = "application/json")
+    @ResponseBody
+    public ResponseBody checkout(Model model, HttpServletRequest httpServletRequest){
+
     }
 
 

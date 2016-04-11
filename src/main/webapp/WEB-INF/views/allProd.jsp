@@ -4,10 +4,27 @@
 <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script language="javascript" type="text/javascript" src="/resources/js/shoppingCart.js"></script>
 <div class=" body">
+
+    <div id="shoppingCart">shoppingCart
+        <p><a href="cart"><img src="http://www.linestyle.com.ua/ru/images/car.png"
+                               width="149" height="110" alt="cart"></a>
+        </p>
+        <table id="shoppingCart1" border="0">
+            <tr>
+                <td>TotalCost:</td>
+                <td id="totalCost">${totalCost}</td>
+            </tr>
+            <tr>
+                <td>TotalAmount:</td>
+                <td id="totalAmount">${totalAmount}</td>
+            </tr>
+        </table>
+    </div>
+
   <c:forEach var="product" items="${products}">
     <table border="0">
       <tr>
-        <td rowspan="4"><img src="/resources/image/deadpool.jpg"></td>
+        <td rowspan="4"><img src="/resources/image/${product.id}.jpg"></td>
         <td>${product.title}</td>
       </tr>
       <tr>
@@ -31,19 +48,5 @@
     <td>Quantity: ${totalAmount}</td>
     <td>Total Cost: ${totalCost}</td>
   </div>
-  <div id="shoppingCart">shoppingCart
-      <p><a href="cart"><img src="http://www.linestyle.com.ua/ru/images/car.png"
-                             width="149" height="110" alt="cart"></a>
-      </p>
-      <table id="shoppingCart1" border="0">
-          <tr>
-              <td>TotalCost:</td>
-              <td id="totalCost">${totalCost}</td>
-          </tr>
-          <tr>
-              <td>TotalAmount:</td>
-              <td id="totalAmount">${totalAmount}</td>
-          </tr>
-      </table>
-  </div>
+
 </div>

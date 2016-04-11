@@ -11,7 +11,6 @@ $(document).ready(function(){
                 $('#totalAmount').html(response.totalAmount);
 
                 alert( "Всего добавлено товаров: " + response.totalAmount + "   На сумму: " + response.totalCost);
-
             }
         });
 

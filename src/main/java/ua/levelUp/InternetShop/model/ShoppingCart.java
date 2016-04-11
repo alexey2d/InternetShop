@@ -47,7 +47,7 @@ public class ShoppingCart {
         return shoppingCartItemHashMap.get(product.getId()).getQuantity();
     }
 
-    public ShoppingCartItem deleteOrderItem(Product product, int quantity) throws ProductException  {
+    public ShoppingCartItem deleteCartItem(Product product, int quantity) throws ProductException  {
         ShoppingCartItem currentShoppingCartItem = shoppingCartItemHashMap.get(product.getId());
         if(currentShoppingCartItem != null) {
             currentShoppingCartItem.delete(quantity);
@@ -56,6 +56,10 @@ public class ShoppingCart {
 //        add deleting 4 quantity 0 values
 
         return currentShoppingCartItem;
+    }
+
+    public void deleteCartItem(Product product) {
+        shoppingCartItemHashMap.remove(product.getId());
     }
 
     private BigDecimal calculateTotalCost() {
