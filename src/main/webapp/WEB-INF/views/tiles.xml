@@ -41,4 +41,8 @@
     <definition name="userAdd" extends="layout.basic">
         <put-attribute name="body" value="/WEB-INF/views/userAdd.jsp"/>
     </definition>
+
+    <definition name="showCart" extends="layout.basic">
+        <put-attribute name="body" value="/WEB-INF/views/cart.jsp"/>
+    </definition>
 </tiles-definitions>

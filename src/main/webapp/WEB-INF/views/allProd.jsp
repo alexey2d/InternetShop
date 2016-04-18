@@ -3,13 +3,12 @@
 
 <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script language="javascript" type="text/javascript" src="/resources/js/shoppingCart.js"></script>
-<div class=" body">
-
+<div class="body">
     <div id="shoppingCart">shoppingCart
         <p><a href="cart"><img src="http://www.linestyle.com.ua/ru/images/car.png"
                                width="149" height="110" alt="cart"></a>
         </p>
-        <table id="shoppingCart1" border="0">
+        <table id="shoppingCartTable" border="0">
             <tr>
                 <td>TotalCost:</td>
                 <td id="totalCost">${totalCost}</td>
@@ -44,9 +43,5 @@
       </tr>
     </table>
   </c:forEach>
-  <div> <td>Shopping cart</td>
-    <td>Quantity: ${totalAmount}</td>
-    <td>Total Cost: ${totalCost}</td>
-  </div>
 
 </div>

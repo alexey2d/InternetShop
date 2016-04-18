@@ -3,7 +3,6 @@ package ua.levelUp.InternetShop.model;
 import com.google.common.primitives.Longs;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
-import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 
@@ -15,7 +14,7 @@ import java.math.BigDecimal;
 public class ShoppingCartItem {
     private Product product;
     private int quantity;
-    private BigDecimal totalPrice; //  = new BigDecimal(0);
+    private BigDecimal totalItemPrice; //  = new BigDecimal(0);
 
 
     public ShoppingCartItem() {
@@ -32,18 +31,18 @@ public class ShoppingCartItem {
         this.quantity = quantity;
     }
 
-    public BigDecimal getShoppingCartItemPrice() {
-        totalPrice = new BigDecimal(quantity);
-        totalPrice = totalPrice.multiply(product.getPrice());
-        return totalPrice;
+    public BigDecimal getTotalItemPrice() {
+        totalItemPrice = new BigDecimal(quantity);
+        totalItemPrice = totalItemPrice.multiply(product.getPrice());
+        return totalItemPrice;
     }
 
     public void add(int quantity) {
         this.quantity += quantity;
     }
 
-    public void delete(int quantity) throws ProductException{
-        if(this.quantity - quantity < 0 ) {
+    public void delete(int quantity) throws ProductException {
+        if (this.quantity - quantity < 0) {
             throw new ProductException("Amount can't be less zero.");
         } else {
             this.quantity -= quantity;

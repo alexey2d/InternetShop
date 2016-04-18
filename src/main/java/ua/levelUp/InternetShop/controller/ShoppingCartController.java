@@ -78,7 +78,7 @@ public class ShoppingCartController {
         }
         shoppingCart.addCartItem(product);
 //        httpServletRequest.setAttribute("cart", shoppingCart); // is not work :( shoppingCart isn't saved
-        httpSession.setAttribute("cart", shoppingCart); // it work property :)
+        httpSession.setAttribute("cart", shoppingCart); // it work properly :)
 
         model.addAttribute("totalAmount", shoppingCart.getTotalCartItemsQuantity());
         model.addAttribute("totalCost",  shoppingCart.getTotalCartCost());
@@ -101,10 +101,14 @@ public class ShoppingCartController {
         return new ModelAndView("showCart");
     }
 
-    @RequestMapping(value = "checkout", method = RequestMethod.POST, produces = "application/json")
-    @ResponseBody
-    public ResponseBody checkout(Model model, HttpServletRequest httpServletRequest){
+    @RequestMapping(value = "checkout", method = RequestMethod.GET)
+    public String checkout(Model model, HttpServletRequest httpServletRequest){
+        ShoppingCart shoppingCart;
+        HttpSession httpSession = httpServletRequest.getSession(true);
+        shoppingCart = (ShoppingCart) httpSession.getAttribute("cart");
 
+        model.addAttribute("items", shoppingCart.getShoppingCartItems());
+        return "showCart";
     }
 
 

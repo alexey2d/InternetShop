@@ -11,11 +11,11 @@
 
 <div id="header">
 
-    <a href="#" class="button">жмякни меня</a>
+    <a href="#" class="button">???</a>
     <a href="#" class="button">admin</a>
-        <a href="#" class="button">login</a>
-            <a href="#" class="button">add</a>
-            <a href="#" class="button">Shopping Cart</a>
+    <a href="#" class="button">login</a>
+    <a href="#" class="button">add</a>
+    <a href="../cart/checkout" class="button">Shopping Cart</a>
 
 
 </div>

@@ -65,12 +65,12 @@ public class ShoppingCart {
     private BigDecimal calculateTotalCost() {
         totalCartCost = new BigDecimal(0);
 //        for (HashMap<Long, ShoppingCartItem> items: shoppingCartItemHashMap.values())  {
-//            totalCartCost = totalCartCost.add(items.getShoppingCartItemPrice());
+//            totalCartCost = totalCartCost.add(items.getTotalItemPrice());
 //        }
         Iterator it = shoppingCartItemHashMap.entrySet().iterator();
         while (it.hasNext()) {
             Map.Entry<Long, ShoppingCartItem> entry = (Map.Entry)it.next();
-            totalCartCost = totalCartCost.add(entry.getValue().getShoppingCartItemPrice());
+            totalCartCost = totalCartCost.add(entry.getValue().getTotalItemPrice());
         }
         return totalCartCost;
     }
