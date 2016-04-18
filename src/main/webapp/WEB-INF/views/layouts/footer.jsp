@@ -8,6 +8,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <link rel="stylesheet" type="text/css" href="/resources/css/main.css">
 <div id="footer">
-  <h5 align="center"> Made in Valhala</h5>
+  <h5 align="center"> Made in LevelUP</h5>
 
 </div>
