@@ -32,7 +32,7 @@ public class ProductController {
     // методы паблик
     @RequestMapping(value = "getAll", method = RequestMethod.GET)
 //    тут не нужен @ResponseBody
-    public String getAllProducts(Model model) {
+        public String getAllProducts(Model model) {
         List<Product> products = productService.getAll();
 
         model.addAttribute("products", products);

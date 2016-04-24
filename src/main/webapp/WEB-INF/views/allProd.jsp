@@ -3,9 +3,12 @@
 
 <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
 <script language="javascript" type="text/javascript" src="/resources/js/shoppingCart.js"></script>
+<script language="javascript" type="text/javascript" src="/resources/js/select.js"></script>
+<link rel="stylesheet" type="text/css" href="/resources/css/shoppingCart.css">
+
 <div class="body">
-    <div id="shoppingCart">shoppingCart
-        <p><a href="cart"><img src="http://www.linestyle.com.ua/ru/images/car.png"
+    <div id="shoppingCart">Shopping Cart
+        <p><a href="../cart/checkout"><img src="http://www.linestyle.com.ua/ru/images/car.png"
                                width="149" height="110" alt="cart"></a>
         </p>
         <table id="shoppingCartTable" border="0">
@@ -20,10 +23,19 @@
         </table>
     </div>
 
+    <div id="sort_view">
+        <span>Сортировка</span>
+        <select class="select_id" onchange="val()"  id="select_id" >
+            <option style="color:indigo" value="0">по названию</option>
+            <option style="color:gold" value="1">цена(увеличение)</option>
+            <option style="color:tomato" value="2">цена(уменьшение)</option>
+        </select>
+    </div>
+
   <c:forEach var="product" items="${products}">
     <table border="0">
       <tr>
-        <td rowspan="4"><img src="/resources/image/${product.id}.jpg"></td>
+        <td rowspan="4"><img src="/resources/image/${product.id}.jpg" weight="85" height="128"></td>
         <td>${product.title}</td>
       </tr>
       <tr>

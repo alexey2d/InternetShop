@@ -15,4 +15,18 @@ $(document).ready(function () {
         });
 
     });
+
+    $('.deleteFromCart').on("click", function () {
+        var id_prod = $(this).data('product-id');
+        // alert("Product id: " + id_prod);
+        $.ajax({
+            url: '/cart/delete/' + id_prod,
+            // dataType: 'JSON',
+            type: 'POST',
+            success: function () {
+                location.reload();
+            }
+        });
+
+    });
 });

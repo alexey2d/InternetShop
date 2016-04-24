@@ -30,6 +30,10 @@
         <put-attribute name="body" value="/WEB-INF/views/allProd.jsp"/>
     </definition>
 
+    <definition name="start" extends="layout.basic">
+        <put-attribute name="body" value="/WEB-INF/views/start.jsp"/>
+    </definition>
+
     <definition name="created_product" extends="layout.basic">
         <put-attribute name="body" value="/WEB-INF/views/created_product.jsp"/>
     </definition>

@@ -14,7 +14,7 @@
     <a href="#" class="button">???</a>
     <a href="#" class="button">admin</a>
     <a href="#" class="button">login</a>
-    <a href="#" class="button">add</a>
+    <a href="../product/getAll" class="button">products</a>
     <a href="../cart/checkout" class="button">Shopping Cart</a>
 
 

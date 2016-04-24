@@ -86,9 +86,10 @@ public class ShoppingCartController {
         return new ResponseEntity(model, HttpStatus.OK);
     }
 
-//    удаление товара из карты. товар из карты удаляется
-    @RequestMapping(value = "/delete/{id_prod}", method = RequestMethod.POST, produces = "application/json")
-    public ModelAndView deleteProduct(@PathVariable("id_prod") long id, Model model, HttpServletRequest httpServletRequest) {
+//    удаление товара из карты. товар из карты полностью удаляется
+    @RequestMapping(value = "delete/{id_prod}", method = RequestMethod.POST, produces = "application/json")
+    public // ModelAndView
+    String deleteProduct(@PathVariable("id_prod") long id, Model model, HttpServletRequest httpServletRequest) {
         Product product = productService.findById(id);
         ShoppingCart shoppingCart;
         httpSession = httpServletRequest.getSession(true);
@@ -96,9 +97,10 @@ public class ShoppingCartController {
         shoppingCart.deleteCartItem(product);
 
         httpSession.setAttribute("cart", shoppingCart);
-        model.addAttribute("totalAmount", shoppingCart.getTotalCartItemsQuantity());
-        model.addAttribute("totalCost",  shoppingCart.getTotalCartCost());
-        return new ModelAndView("showCart");
+//        model.addAttribute("totalAmount", shoppingCart.getTotalCartItemsQuantity());
+//        model.addAttribute("totalCost",  shoppingCart.getTotalCartCost());
+//        return new ModelAndView("showCart");
+        return "showCart";
     }
 
     @RequestMapping(value = "checkout", method = RequestMethod.GET)
