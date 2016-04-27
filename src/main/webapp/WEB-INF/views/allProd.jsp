@@ -23,7 +23,7 @@
         </table>
     </div>
 
-    <div id="sort_view">
+    <div id="sorted">
         <span>Сортировка</span>
         <select class="select_id" onchange="val()"  id="select_id" >
             <option style="color:indigo" value="title">по названию</option>
