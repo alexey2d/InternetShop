@@ -24,7 +24,7 @@ $(document).ready(function () {
             // dataType: 'JSON',
             type: 'POST',
             success: function () {
-                location.reload();
+                document.location.reload();
             }
         });
 

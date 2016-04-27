@@ -26,9 +26,9 @@
     <div id="sort_view">
         <span>Сортировка</span>
         <select class="select_id" onchange="val()"  id="select_id" >
-            <option style="color:indigo" value="0">по названию</option>
-            <option style="color:gold" value="1">цена(увеличение)</option>
-            <option style="color:tomato" value="2">цена(уменьшение)</option>
+            <option style="color:indigo" value="title">по названию</option>
+            <option style="color:gold" value="price_inc">цена(увеличение)</option>
+            <option style="color:tomato" value="price_desc">цена(уменьшение)</option>
         </select>
     </div>
 

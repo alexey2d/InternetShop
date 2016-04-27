@@ -15,6 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import ua.levelUp.InternetShop.model.Product;
 import ua.levelUp.InternetShop.service.ProductService;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import static org.springframework.data.jpa.domain.AbstractPersistable_.id;
@@ -32,8 +36,47 @@ public class ProductController {
     // методы паблик
     @RequestMapping(value = "getAll", method = RequestMethod.GET)
 //    тут не нужен @ResponseBody
-        public String getAllProducts(Model model) {
+        public String getAllProducts(Model model, HttpServletRequest httpServletRequest) {
         List<Product> products = productService.getAll();
+
+        HttpSession httpSession = httpServletRequest.getSession(true);
+
+        String sortType = httpServletRequest.getParameter("sort");
+        if (sortType == null) sortType = "";
+        switch (sortType){
+//            by title
+            case "title" : Collections.sort(products, new Comparator(){
+                public int compare(Object o1, Object o2) {
+                    Product pr1 = (Product)o1;
+                    Product pr2 = (Product)o2;
+                    int compareResultTitle = pr1.getTitle().compareToIgnoreCase(pr2.getTitle());
+                    return compareResultTitle != 0 ? compareResultTitle : pr1.getPrice().compareTo(pr2.getPrice());
+                }
+            });
+                break;
+//            by price inc
+            case "price_inc" : Collections.sort(products, new Comparator(){
+                public int compare(Object o1, Object o2) {
+                    Product pr1 = (Product)o1;
+                    Product pr2 = (Product)o2;
+                    int compareResultPrice = pr1.getPrice().compareTo(pr2.getPrice());
+                    return compareResultPrice != 0 ? compareResultPrice : pr1.getTitle().compareTo(pr2.getTitle());
+                }
+            });
+                break;
+            // by price desc
+            case "price_desc" : Collections.sort(products, new Comparator(){
+                    public int compare(Object o1, Object o2) {
+                        Product pr1 = (Product)o1;
+                        Product pr2 = (Product)o2;
+                        int compareResultPrice = -1 * pr1.getPrice().compareTo(pr2.getPrice());
+                        return compareResultPrice != 0 ? compareResultPrice : pr1.getPrice().compareTo(pr2.getPrice());
+                    }
+                });
+                break;
+            default:
+                break;
+        }
 
         model.addAttribute("products", products);
         return "getProducts";
