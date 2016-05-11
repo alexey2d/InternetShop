@@ -23,21 +23,23 @@
 // });
 
 $(document).ready(function () {
-    if (found = document.location.href.match(/sort=([^&$]+)/i)) {
-        $('#sorted').val(found[1]);
+
+    if (found=document.location.href.match(/sort=([^&$]+)/i)) {
+        $('#catalogSort').val(found[1]);
+
     }
 
-    $('#sorted').on('change', function () {
+    $('#catalogSort').on('change', function(){
+        var searsh = $(this).val();
         document.location.href = replaceUrlParam(document.location.href, 'sort', $(this).val());
     })
 
-    function replaceUrlParam(url, paramName, paramValue) {
-        var pattern = new RegExp('\\b(' + paramName + '=).*?(&|$)')
-        if (url.search(pattern) >= 0) {
+
+    function replaceUrlParam(url, paramName, paramValue){
+        var pattern = new RegExp('\\b('+paramName+'=).*?(&|$)');
+        if(url.search(pattern)>=0){
             return url.replace(pattern, '$1' + paramValue + '$2');
         }
-        return url + (url.indexOf('?') > 0 ? '&' : '?') + paramName + '=' + paramValue
-
+        return url + (url.indexOf('?')>0 ? '&' : '?') + paramName +'='+ paramValue
     }
-
-})
+});

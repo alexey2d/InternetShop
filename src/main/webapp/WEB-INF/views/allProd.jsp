@@ -23,14 +23,12 @@
         </table>
     </div>
 
-    <div id="sorted">
-        <span>Сортировка</span>
-        <select class="select_id" onchange="val()"  id="select_id" >
+        <select id="catalogSort" >
+            <option disabled>Сортировка</option>
             <option style="color:indigo" value="title">по названию</option>
             <option style="color:gold" value="price_inc">цена(увеличение)</option>
             <option style="color:tomato" value="price_desc">цена(уменьшение)</option>
         </select>
-    </div>
 
   <c:forEach var="product" items="${products}">
     <table border="0">
